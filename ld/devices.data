@@ -1,0 +1,75 @@
+################################################################################
+#
+# Device chip tree definition file.
+#
+# Copyright (c) 2013 Frantisek Burian <Bufran@seznam.cz>
+# Copyright (C) 2013 Werner Almesberger <wpwrak>
+#
+# Line description:
+#   <pattern> <parent> (<data> ...)
+#
+#   <pattern>: is the pattern for the chip description to be searched for.
+#       The case of the pattern string is ignored.
+#       Pattern match symbols:
+#            ?  - matches exactly one character
+#            *  - matches none or more characters
+#            +  - matches single or more characters
+#
+#   <parent>: is the parent group name, where the search will continue.
+#       There are special parents names that controls traversing:
+#             "END" - Exit traversal.
+#             "+"   - Don't change the parent. Use for split long line to two.
+#
+#   <data>: space-separated list of preprocessor symbols supplied to the linker.
+#       -D option name is automatically prepended to each symbol definition
+#
+# All lines starting with # symbol are treated as Comments
+#
+# Recommended tree hierarchy:
+#
+#   <device name> <family group> <device specific params>
+#       +- <family group> <family> <family group specific params>
+#           +- <family> <architecture> <device family specific params>
+#               +- <architecture> END <architecture specific params>
+#
+# You can split the long line into two or more by using "+" in the parent field,
+# and defining same regex with appropriate parent on the next line. Example:
+#
+#    device + PARAM1=aaa PARAM2=bbbb PARAM3=ccc PARAM4=dddd PARAM5=eeee
+#    device parent PARAM6=ffff PARAM7=gggg PARAM8=hhhh
+#    parent END
+#
+# The order of the lines is important. After the regex match, its parent will
+# be used for match on the next line. If two regexp lines matches input, only
+# the first will be evaluated, except special group definition "+"
+#
+# The regex matches entire sym
+#
+# Example:
+#
+# --- devices.data file ---
+# stm32f05[01]?4* stm32f0 ROM=16K RAM=4K
+# stm32f0 stm32 ROM_OFF=0x08000000 RAM_OFF=0x20000000
+# stm32 END
+#
+# --- queried chip name ---
+# stm32f051c8t6
+#
+# --- output of the python script ---
+# -DROM=16K -DRAM=4K -DROM_OFF=0x08000000 -DRAM_OFF=0x20000000
+#
+# The generated linker script file will contain sections rom and ram with
+# appropriate initialization code, specified in linker file source linker.ld.S
+#
+
+################################################################################
+# the NRF5 chips
+
+nrf52832??ab nrf52 ROM=256K RAM=32K
+nrf52832??aa nrf52 ROM=512K RAM=64K
+
+
+################################################################################
+# the NRF5 families
+
+nrf52 END ROM_OFF=0x00000000 RAM_OFF=0x20000000 CPU=cortex-m4 FPU=hard-fpv4-sp-d16
