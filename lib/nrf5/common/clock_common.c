@@ -8,9 +8,6 @@ Luong Le <novercy@live.com>
 /*
  * This file is part of the libopencm3 project.
  *
- * Copyright (C) 2018 Gerrit Maus <funk@maus.xyz>
- * Copyright (C) 2018 Luong Le <novercy@live.com>
- *
  * This library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -231,20 +228,38 @@ uint16_t clock_lfclk_run_status(void)
 }
 
 /*---------------------------------------------------------------------------*/
-/** @brief Clock Select Source for LFCLK.
+/** @brief Clock Select Source RC for LFCLK.
 
-Select Clock source for the LFCLK. source can be selected as RC, XTAL, or
-SYNTH.
+Select source RC for the LFCLK.
 
-@param[in] source unsigned 32 bit. predetermined source names @ref 
-clock_lfclksrc
 */
 
-void clock_lfclk_source(char source)
+void clock_lfclk_source_rc(void)
 {
-	if(source & RC){CLOCK_LFCLKSRC |= CLOCK_LFCLKSRC_SRC_RC;}
-	else if(source & XTAL){CLOCK_LFCLKSRC |= CLOCK_LFCLKSRC_SRC_XTAL;}
-	else if(source & SYNTH){CLOCK_LFCLKSRC |= CLOCK_LFCLKSRC_SRC_SYNTH;}
+	CLOCK_LFCLKSRC |= CLOCK_LFCLKSRC_SRC_RC;
+}
+
+/*---------------------------------------------------------------------------*/
+/** @brief Clock Select Source Crystal for LFCLK.
+
+Select source crystal for the LFCLK.
+
+*/
+
+void clock_lfclk_source_xtal(void)
+{
+	CLOCK_LFCLKSRC |= CLOCK_LFCLKSRC_SRC_XTAL;
+}
+/*---------------------------------------------------------------------------*/
+/** @brief Clock Select Source Synthesized for LFCLK.
+
+Select synthesized source for the LFCLK.
+
+*/
+
+void clock_lfclk_source_synth(void)
+{
+	CLOCK_LFCLKSRC |= CLOCK_LFCLKSRC_SRC_SYNTH;
 }
 
 /*---------------------------------------------------------------------------*/

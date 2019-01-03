@@ -9,9 +9,6 @@ Luong Le <novercy@live.com>
 /*
  * This file is part of the libopencm3 project.
  *
- * Copyright (C) 2018 Gerrit Maus <funk@maus.xyz>
- * Copyright (C) 2018 Luong Le <novercy@live.com>
- *
  * This library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -136,7 +133,7 @@ DRIVE_D0S1, DRIVE_D0H1, DRIVE_S0D1, or DRIVE_D0D1.
 void gpio_config(uint32_t pin, uint32_t dir, uint32_t input, uint32_t pull, 
 			uint32_t drive, uint32_t sense)
 {
-	GPIO_PIN_CNF[pin] = GPIO_PIN_CNF_DIR(dir)     |
+	GPIO_PIN_CNF[pin] =   GPIO_PIN_CNF_DIR(dir)     |
 	                      GPIO_PIN_CNF_INPUT(input) |
 	                      GPIO_PIN_CNF_PULL(pull)   |
 	                      GPIO_PIN_CNF_DRIVE(drive) |
