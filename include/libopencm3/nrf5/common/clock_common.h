@@ -7,8 +7,6 @@
 /*
  * This file is part of the libopencm3 project.
  *
- * Copyright (C) 2018 Gerrit Maus <funk@maus.xyz>, Luong Le <novercy@live.com>
- *
  * This library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -125,13 +123,9 @@ triggered
 @{*/
 #define CLOCK_LFCLKSTAT_SRC_RC                     (0 << 0)
 #define CLOCK_LFCLKSTAT_SRC_XTAL                   (1 << 0)
-#define CLOCK_LFCLKSTAT_SRC_Xtal                   (1 << 0)
 #define CLOCK_LFCLKSTAT_SRC_SYNTH                  (0x2 << 0)
-#define CLOCK_LFCLKSTAT_SRC_Synth                  (0x2 << 0)
 #define CLOCK_LFCLKSTAT_STATE_NOTRUNNING           (0 << 16)
-#define CLOCK_LFCLKSTAT_STATE_NotRunning           (0 << 16)
 #define CLOCK_LFCLKSTAT_STATE_RUNNING              (1 << 16)
-#define CLOCK_LFCLKSTAT_STATE_Running              (1 << 16)
 /**@}*/
 
 /* --- CLOCK_LFCLKSRCCOPY values ------------------------------------------- */
@@ -148,16 +142,11 @@ LFCLKSTART task was triggered
 /** @defgroup clock_lfclksrc Clock source for the LFCLK
 @ingroup clock_defines
 @{*/
-#define RC                                         (0 << 0)
 #define CLOCK_LFCLKSRC_SRC_RC                      (0 << 0)
-#define XTAL                                       (1 << 0)
 #define CLOCK_LFCLKSRC_SRC_XTAL                    (1 << 0)
-#define SYNTH                                      (0x2 << 0)
 #define CLOCK_LFCLKSRC_SRC_SYNTH                   (0x2 << 0)
 #define CLOCK_LFCLKSRC_BYPASS_ENABLED              (1 << 16)
-#define CLOCK_LFCLKSRC_BYPASS_Enabled              (1 << 16)
 #define CLOCK_LFCLKSRC_EXTERNAL_ENABLED            (1 << 17)
-#define CLOCK_LFCLKSRC_EXTERNAL_Enabled            (1 << 17)
 /**@}*/
 
 /* --- CLOCK_CTIV values --------------------------------------------------- */
@@ -205,7 +194,9 @@ uint32_t clock_hfclk_trigger_status(void);
 uint32_t clock_lfclk_trigger_status(void);
 uint16_t clock_hfclk_run_status(void);
 uint16_t clock_lfclk_run_status(void);
-void clock_lfclk_source(char source);
+void clock_lfclk_source_rc(void);
+void clock_lfclk_source_xtal(void);
+void clock_lfclk_source_synth(void);
 void clock_lfclk_extsource_bypass(void);
 void clock_lfclk_extsource_enable(void);
 
