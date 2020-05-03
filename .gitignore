@@ -1,0 +1,10 @@
+*.a
+*.o
+*.d
+
+include/libopencm3/nrf5/1/nvic.h
+include/libopencm3/nrf5/2/nvic.h
+include/libopencmsis/nrf5/1/irqhandlers.h
+include/libopencmsis/nrf5/2/irqhandlers.h
+lib/nrf5/1/vector_nvic.c
+lib/nrf5/2/vector_nvic.c
